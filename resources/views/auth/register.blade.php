@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('titulo')
-    Registrate en DevStagram
+    Regístrate en DevStagram
 @endsection
 
 @section('contenido')
@@ -11,7 +11,8 @@
     </div>
 
     <div class="md:w-4/12 bg-white p-6 rounded-lg shadow-xl">
-        <form>
+        <form action="{{ route('register')}}" method="POST" novalidate>
+            @csrf
             <div class="mb-5">
                 <label for="name" class="mb-2 block uppercase text-gray-500 font-bold">
                     Nombre
@@ -21,9 +22,14 @@
                 name="name"
                 type="text"
                 placeholder="Tu nombre"
-                class="border p-3 w-full rounded-lg"
+                class="border p-3 w-full rounded-lg @error('name') border-red-500 @enderror"
+                value="{{old('name')}}"
                 />
-            </div>
+
+                @error('name')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }} </p>
+                @enderror
+            </div> 
 
             <div class="mb-5">
                 <label for="username" class="mb-2 block uppercase text-gray-500 font-bold">
@@ -36,6 +42,9 @@
                 placeholder="Tu nombre de Usuario"
                 class="border p-3 w-full rounded-lg"
                 />
+                @error('username')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }} </p>
+                @enderror
             </div>
 
             <div class="mb-5">
@@ -49,6 +58,9 @@
                 placeholder="Tu email de registro"
                 class="border p-3 w-full rounded-lg"
                 />
+                @error('email')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }} </p>
+                @enderror
             </div>
 
             <div class="mb-5">
@@ -62,6 +74,9 @@
                 placeholder="Password de registro"
                 class="border p-3 w-full rounded-lg"
                 />
+                @error('password')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{ $message }} </p>
+                @enderror
             </div>
 
             <div class="mb-5">

@@ -11,12 +11,17 @@ class PostController extends Controller
     {
         $this->middleware('auth');
     }
+
     public function index(User $user)
     {   
-      
-       return view('dashboard', [
         
+       return view('dashboard',[
+        'user' => $user
        ]);
+    }
+    public function create()
+    {
+       return view('posts.create');
     }
 
 }
